@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline';">
+  <title>Popup Image App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Title Bar (Draggable) -->
+    <div class="title-bar">
+      <span class="title">Popup</span>
+      <div class="window-controls">
+        <label class="pin-toggle" title="Always on top">
+          <input type="checkbox" id="alwaysOnTop" checked>
+          <span class="pin-icon">&#128204;</span>
+        </label>
+        <button id="minimizeBtn" class="control-btn" title="Minimize">&#8722;</button>
+        <button id="closeBtn" class="control-btn close-btn" title="Close">&#10005;</button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Text Input Section -->
+      <div class="text-section">
+        <textarea id="textInput" placeholder="Enter your text here..."></textarea>
+      </div>
+
+      <!-- Image Controls -->
+      <div class="image-controls">
+        <button id="addImageBtn" class="action-btn">Add Image</button>
+        <button id="addUrlBtn" class="action-btn">Add from URL</button>
+        <button id="saveBtn" class="action-btn save-btn">Save</button>
+        <button id="loadBtn" class="action-btn load-btn">Load</button>
+      </div>
+
+      <!-- URL Input (hidden by default) -->
+      <div id="urlInputContainer" class="url-input-container hidden">
+        <input type="text" id="urlInput" placeholder="Enter image URL...">
+        <button id="urlSubmitBtn" class="action-btn">Add</button>
+        <button id="urlCancelBtn" class="action-btn">Cancel</button>
+      </div>
+
+      <!-- Drop Zone -->
+      <div id="dropZone" class="drop-zone">
+        <p>Drag & drop images here</p>
+      </div>
+
+      <!-- Image Gallery -->
+      <div id="imageGallery" class="image-gallery"></div>
+    </div>
+
+    <!-- Image Editor Modal -->
+    <div id="editorModal" class="editor-modal hidden">
+      <div class="editor-content">
+        <div class="editor-header">
+          <span>Edit Image</span>
+          <button id="closeEditorBtn" class="control-btn close-btn">&#10005;</button>
+        </div>
+        <div class="editor-canvas-container">
+          <canvas id="editorCanvas"></canvas>
+          <div id="cropOverlay" class="crop-overlay hidden">
+            <div id="cropBox" class="crop-box"></div>
+          </div>
+        </div>
+        <div class="editor-tools">
+          <div class="tool-group">
+            <button id="cropBtn" class="tool-btn active">Crop</button>
+            <button id="resizeBtn" class="tool-btn">Resize</button>
+          </div>
+          <div id="cropControls" class="tool-controls">
+            <p>Drag to select crop area</p>
+          </div>
+          <div id="resizeControls" class="tool-controls hidden">
+            <label>Width: <input type="number" id="resizeWidth" min="1"></label>
+            <label>Height: <input type="number" id="resizeHeight" min="1"></label>
+            <label><input type="checkbox" id="lockAspect" checked> Lock aspect ratio</label>
+          </div>
+        </div>
+        <div class="editor-actions">
+          <button id="applyEditBtn" class="action-btn">Apply</button>
+          <button id="cancelEditBtn" class="action-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="image-editor.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
